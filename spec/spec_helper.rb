@@ -1,3 +1,14 @@
+# in spec/spec_helper.rb
+require_relative './setup_test_database'
+
+ENV['ENVIRONMENT'] = 'test'
+
+RSpec.configure do |config|
+  config.before(:each) do
+    'setup_test_database.rb'
+  end
+end
+
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
@@ -11,7 +22,8 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 ])
 SimpleCov.start
 # Tell Capybara to talk to BookmarkManager
-ENV['RACK_ENV'] = 'test'
+
+#ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
